@@ -1,6 +1,6 @@
 # Aula 02 - Primeiros comandos do Terminal Linux
 
-> Data: 26/06/2026
+> Data: XX/XX/2026
 
 ## Objetivo da aula
 
