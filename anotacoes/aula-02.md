@@ -1,40 +1,58 @@
-# Aula 02 - Primeiros comandos do Terminal Linux
+# Aula 02 - Primeiros Comandos do Terminal Linux
 
 > **Data:** 26/06/2026
 
-## Objetivo da aula
+---
 
-Nesta aula comecei a utilizar o terminal Linux, aprendendo comandos básicos para navegação, monitoramento do sistema e gerenciamento de pacotes.
+# Objetivo da aula
+
+Nesta aula comecei a utilizar o terminal Linux, aprendendo comandos para monitoramento do sistema, consulta de informações, navegação entre diretórios, gerenciamento de pacotes e permissões de arquivos.
 
 ---
+
+# Comandos estudados
 
 # Monitoramento do sistema
 
 ## top
 
-Mostra os processos que estão sendo executados em tempo real, além do consumo de CPU, memória e outros recursos do sistema.
+Mostra os processos que estão sendo executados em tempo real, além do consumo de recursos como CPU e memória.
 
-**Observação**
+É um dos comandos mais utilizados por administradores de sistemas para verificar o funcionamento do computador.
 
-Se algum processo aparecer com a letra **Z** (Zombie), significa que ele terminou sua execução, porém ainda não foi totalmente removido da memória pelo sistema. Esse processo praticamente não consome recursos, mas ainda permanece registrado até que seu processo "pai" o finalize.
+### Observação
+
+Se aparecer a letra **Z** (Zombie) na coluna de estado de um processo, significa que aquele processo já terminou sua execução, porém seu processo "pai" ainda não removeu seu registro da tabela de processos.
+
+Esse tipo de processo praticamente não utiliza memória nem CPU, sendo apenas um registro temporário.
 
 ---
 
 ## top + 1
 
-Mostra o uso da CPU separado por cada núcleo do processador.
+Mostra o uso da CPU separado por cada núcleo (core) do processador.
+
+Facilita a identificação de qual núcleo está sendo mais utilizado.
 
 ---
 
 ## Shift + E
 
-Dentro do comando `top`, altera a unidade de medida da memória (KB, MB, GB, etc.).
+Dentro do comando `top`, altera a unidade utilizada para mostrar o consumo de memória.
+
+Exemplo:
+
+- KB
+- MB
+- GB
 
 ---
 
 ## htop
 
-Versão mais moderna e interativa do comando `top`, facilitando a visualização dos processos do sistema.
+Versão mais moderna e visual do comando `top`.
+
+Possui uma interface mais amigável, com barras de utilização de CPU, memória e lista de processos.
 
 ---
 
@@ -42,31 +60,55 @@ Versão mais moderna e interativa do comando `top`, facilitando a visualização
 
 ## dmesg
 
-Exibe as mensagens registradas pelo **Kernel** desde a inicialização do computador.
+Exibe todas as mensagens registradas pelo **Kernel** desde que o computador foi ligado.
 
-### O que é o Kernel?
+Essas mensagens mostram tudo o que aconteceu durante a inicialização do sistema e durante o funcionamento do hardware.
+
+É muito utilizado para diagnosticar problemas em dispositivos como:
+
+- HD ou SSD
+- Pendrive
+- Mouse
+- Teclado
+- Placa de rede
+- Placa de vídeo
+- USB
+
+---
+
+## O que é o Kernel?
 
 O **Kernel** é o núcleo do sistema operacional Linux.
 
-Ele faz a comunicação entre o hardware (processador, memória, disco, placa de vídeo, teclado etc.) e os programas que estão sendo executados.
+Ele é responsável por fazer a comunicação entre o hardware e os programas.
 
-Sempre que algum dispositivo é ligado, removido ou apresenta algum erro, o Kernel registra essa informação.
+Sempre que um programa precisa utilizar algum componente físico do computador, como processador, memória ou disco, ele solicita essa ação ao Kernel.
 
-Por isso, o comando `dmesg` é muito utilizado para diagnosticar problemas de hardware.
+O Kernel controla:
+
+- Processador
+- Memória RAM
+- Disco
+- Placa de vídeo
+- USB
+- Rede
+- Drivers
+
+Sem o Kernel, o sistema operacional não conseguiria controlar o hardware do computador.
 
 ---
 
 ## dmesg | grep
 
-Filtra as mensagens do Kernel para localizar apenas informações específicas.
+Permite filtrar as mensagens do Kernel para encontrar apenas aquilo que você procura.
 
-**Exemplos:**
+### Exemplos
 
 ```bash
 dmesg | grep usb
 ```
 
-Mostra apenas informações relacionadas às portas USB.
+Mostra apenas mensagens relacionadas às portas USB.
 
 ```bash
 dmesg | grep disk
@@ -86,13 +128,22 @@ Mostra mensagens relacionadas à rede.
 
 Mostra informações completas sobre o Kernel e o sistema operacional.
 
+Exibe informações como:
+
+- Nome do sistema
+- Versão do Kernel
+- Arquitetura
+- Nome da máquina
+
 ---
 
 # Espaço em disco
 
 ## df -h
 
-Mostra quanto espaço está sendo utilizado e quanto ainda está disponível nos discos, utilizando um formato fácil de ler (KB, MB, GB).
+Mostra quanto espaço existe nos discos do computador.
+
+A opção `-h` significa **Human Readable**, ou seja, apresenta os tamanhos em um formato mais fácil de entender (MB, GB e TB).
 
 ---
 
@@ -100,31 +151,49 @@ Mostra quanto espaço está sendo utilizado e quanto ainda está disponível nos
 
 ## sudo
 
-Executa um comando com permissões de administrador (SuperUser).
+Executa um comando com permissões de administrador.
+
+A palavra **sudo** significa:
+
+> Super User Do
+
+Ou seja:
+
+"Execute este comando como administrador."
 
 ---
 
 ## apt
 
-Gerenciador de pacotes utilizado no Ubuntu e Debian para instalar, remover e atualizar programas.
+É o gerenciador de pacotes utilizado nas distribuições Ubuntu e Debian.
+
+Com ele é possível:
+
+- Instalar programas
+- Remover programas
+- Atualizar programas
 
 ---
 
 ## apt update
 
-Atualiza a lista de programas disponíveis para instalação.
+Atualiza a lista de programas disponíveis nos repositórios.
+
+Não instala atualizações, apenas verifica quais versões novas existem.
 
 ---
 
 ## apt list
 
-Lista os pacotes instalados ou disponíveis.
+Lista todos os pacotes instalados ou disponíveis.
 
 ---
 
 ## apt dist-upgrade
 
-Atualiza completamente o sistema, resolvendo dependências e instalando novas versões dos pacotes.
+Atualiza completamente o sistema operacional.
+
+Além de instalar versões mais recentes, também resolve dependências e pode instalar ou remover pacotes quando necessário.
 
 ---
 
@@ -133,6 +202,12 @@ Atualiza completamente o sistema, resolvendo dependências e instalando novas ve
 ## pwd
 
 Mostra o caminho completo da pasta atual.
+
+Exemplo:
+
+```text
+/home/joao/Documentos
+```
 
 ---
 
@@ -144,19 +219,39 @@ Lista os arquivos e pastas do diretório atual.
 
 ## ls -l
 
-Lista os arquivos com informações detalhadas, como permissões, proprietário, tamanho e data.
+Lista os arquivos com informações detalhadas.
+
+Mostra:
+
+- Permissões
+- Dono
+- Grupo
+- Tamanho
+- Data
+- Nome
 
 ---
 
 ## ls -a
 
-Mostra todos os arquivos, incluindo os arquivos ocultos.
+Lista todos os arquivos, inclusive os ocultos.
+
+Arquivos ocultos normalmente começam com um ponto (`.`).
+
+Exemplo:
+
+```text
+.bashrc
+.profile
+```
 
 ---
 
 ## ls -la
 
-Combina as opções `-l` e `-a`, exibindo detalhes de todos os arquivos, inclusive os ocultos.
+Combina as opções `-l` e `-a`.
+
+Mostra detalhes de todos os arquivos, inclusive os ocultos.
 
 ---
 
@@ -169,6 +264,12 @@ Lista os arquivos ordenados pela data de modificação.
 ## cd
 
 Entra em uma pasta.
+
+Exemplo:
+
+```bash
+cd Documentos
+```
 
 ---
 
@@ -196,15 +297,17 @@ Exemplo:
 man ls
 ```
 
+Cada comando do Linux possui sua própria página de manual.
+
 ---
 
 ## info
 
-Abre uma documentação mais detalhada de alguns comandos.
+Mostra uma documentação mais detalhada que o `man` para alguns programas.
 
 ---
 
-# Informações sobre permissões
+# Permissões de arquivos
 
 Quando executamos:
 
@@ -218,34 +321,72 @@ Podemos encontrar algo parecido com:
 drwxr-xr-x
 ```
 
-### Primeira letra
+## Primeira letra
+
+Ela identifica o tipo do arquivo.
 
 - `d` → Diretório (pasta)
 - `-` → Arquivo comum
 
-### Permissões
+---
+
+## O significado das letras
 
 - `r` → Read (Leitura)
 - `w` → Write (Escrita)
 - `x` → Execute (Execução)
 
-### Quem possui essas permissões?
+---
 
-As permissões são divididas em três grupos:
+## Quem possui essas permissões?
 
-- **Dono (Owner):** quem criou o arquivo.
-- **Grupo (Group):** usuários pertencentes ao mesmo grupo.
-- **Outros (Others):** qualquer outro usuário do sistema.
+As permissões são divididas em três grupos.
 
-Exemplo:
+### Owner (Dono)
 
-```
+É quem criou o arquivo.
+
+Normalmente possui controle total.
+
+---
+
+### Group (Grupo)
+
+Usuários que pertencem ao mesmo grupo do arquivo.
+
+---
+
+### Others (Outros)
+
+Qualquer outro usuário do sistema.
+
+---
+
+## Exemplo
+
+```text
 drwxr-xr-x
 ```
 
-- Dono → leitura, escrita e execução.
-- Grupo → leitura e execução.
-- Outros → leitura e execução.
+Significa:
+
+**Owner**
+
+- Leitura ✅
+- Escrita ✅
+- Execução ✅
+
+**Group**
+
+- Leitura ✅
+- Execução ✅
+
+**Others**
+
+- Leitura ✅
+- Execução ✅
+
+Como não existe a letra **w** para Grupo e Others, eles não podem alterar nem excluir esse diretório.
 
 ---
 
@@ -255,7 +396,7 @@ drwxr-xr-x
 
 Desliga o computador.
 
-Também existem outros comandos que possuem a mesma finalidade:
+Também é possível utilizar:
 
 ```bash
 sudo poweroff
@@ -269,10 +410,14 @@ sudo shutdown now
 systemctl poweroff
 ```
 
-Todos desligam o sistema, mas atualmente `poweroff` e `shutdown` são os comandos mais utilizados.
+Todos possuem a mesma finalidade: desligar o sistema.
+
+Atualmente, `poweroff` e `shutdown` são os comandos mais utilizados.
 
 ---
 
 # Resumo da aula
 
-Nesta aula aprendi os primeiros comandos do terminal Linux, utilizados para monitorar processos, consultar informações do sistema, navegar entre diretórios, gerenciar pacotes e compreender como funcionam as permissões de arquivos e diretórios.
+Nesta aula tive meu primeiro contato com o terminal Linux, aprendendo comandos para monitoramento do sistema, consulta de informações, gerenciamento de pacotes, navegação entre diretórios e permissões de arquivos.
+
+Também compreendi a função do Kernel, a importância do comando `dmesg` para diagnóstico do sistema e como utilizar o terminal para administrar um ambiente Linux de forma mais eficiente.
