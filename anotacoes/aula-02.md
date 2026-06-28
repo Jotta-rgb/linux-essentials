@@ -1,6 +1,6 @@
 # Aula 02 - Primeiros comandos do Terminal Linux
 
-> Data: 26/06/2026
+> **Data:** 26/06/2026
 
 ## Objetivo da aula
 
@@ -8,191 +8,187 @@ Nesta aula comecei a utilizar o terminal Linux, aprendendo comandos básicos par
 
 ---
 
-# Comandos estudados
+# Monitoramento do sistema
 
-## Monitoramento do sistema
+## top
 
-### top
-
-Mostra os processos que estão sendo executados em tempo real e o consumo de recursos do sistema.
+Mostra os processos que estão sendo executados em tempo real, além do consumo de CPU, memória e outros recursos do sistema.
 
 **Observação**
 
-Se aparecer um processo com a letra **Z (Zombie)** significa que ele já terminou sua execução, mas ainda permanece listado porque o processo pai ainda não liberou seus recursos.
+Se algum processo aparecer com a letra **Z** (Zombie), significa que ele terminou sua execução, porém ainda não foi totalmente removido da memória pelo sistema. Esse processo praticamente não consome recursos, mas ainda permanece registrado até que seu processo "pai" o finalize.
 
 ---
 
-### top + 1
+## top + 1
 
-Exibe o uso da CPU separado por núcleo (core).
-
----
-
-### Shift + E
-
-Dentro do comando **top**, alterna a unidade de medida da memória (KB, MB e GB).
+Mostra o uso da CPU separado por cada núcleo do processador.
 
 ---
 
-### htop
+## Shift + E
 
-Versão mais moderna e visual do comando **top**.
-
-Possui barras gráficas e facilita o monitoramento dos processos.
+Dentro do comando `top`, altera a unidade de medida da memória (KB, MB, GB, etc.).
 
 ---
 
-## Informações do sistema
+## htop
 
-### dmesg
+Versão mais moderna e interativa do comando `top`, facilitando a visualização dos processos do sistema.
 
-Exibe as mensagens registradas pelo **Kernel** desde que o computador foi ligado.
+---
+
+# Informações do sistema
+
+## dmesg
+
+Exibe as mensagens registradas pelo **Kernel** desde a inicialização do computador.
 
 ### O que é o Kernel?
 
-O Kernel é o núcleo do sistema operacional Linux.
+O **Kernel** é o núcleo do sistema operacional Linux.
 
-Ele é responsável por fazer a comunicação entre o hardware (processador, memória, disco, placa de rede etc.) e os programas que utilizamos.
+Ele faz a comunicação entre o hardware (processador, memória, disco, placa de vídeo, teclado etc.) e os programas que estão sendo executados.
 
-Sempre que um dispositivo é iniciado ou ocorre algum evento importante no sistema, o Kernel registra essa informação.
+Sempre que algum dispositivo é ligado, removido ou apresenta algum erro, o Kernel registra essa informação.
+
+Por isso, o comando `dmesg` é muito utilizado para diagnosticar problemas de hardware.
 
 ---
 
-### dmesg | grep nome
+## dmesg | grep
 
-Filtra o resultado do comando **dmesg**.
+Filtra as mensagens do Kernel para localizar apenas informações específicas.
 
-Exemplos:
+**Exemplos:**
 
 ```bash
 dmesg | grep usb
+```
+
+Mostra apenas informações relacionadas às portas USB.
+
+```bash
 dmesg | grep disk
+```
+
+Mostra mensagens relacionadas aos discos.
+
+```bash
 dmesg | grep net
 ```
 
-Assim fica mais fácil encontrar apenas as informações desejadas.
+Mostra mensagens relacionadas à rede.
 
 ---
 
-### df -h
+## uname -a
 
-Mostra quanto espaço existe em cada disco.
-
-A opção **-h** significa **human readable**, exibindo os valores em KB, MB ou GB.
+Mostra informações completas sobre o Kernel e o sistema operacional.
 
 ---
 
-### uname -a
+# Espaço em disco
 
-Mostra informações sobre o Kernel e o sistema operacional.
+## df -h
 
----
-
-## Gerenciamento de pacotes
-
-### sudo
-
-Executa um comando com privilégios de administrador (Super User).
+Mostra quanto espaço está sendo utilizado e quanto ainda está disponível nos discos, utilizando um formato fácil de ler (KB, MB, GB).
 
 ---
 
-### apt
+# Gerenciamento de pacotes
 
-Gerenciador de pacotes utilizado em distribuições como Ubuntu e Debian.
+## sudo
 
-Permite instalar, remover e atualizar programas.
-
----
-
-### apt update
-
-Atualiza a lista de pacotes disponíveis.
-
-Não instala atualizações.
+Executa um comando com permissões de administrador (SuperUser).
 
 ---
 
-### apt list
+## apt
+
+Gerenciador de pacotes utilizado no Ubuntu e Debian para instalar, remover e atualizar programas.
+
+---
+
+## apt update
+
+Atualiza a lista de programas disponíveis para instalação.
+
+---
+
+## apt list
 
 Lista os pacotes instalados ou disponíveis.
 
 ---
 
-### apt dist-upgrade
+## apt dist-upgrade
 
-Atualiza todo o sistema e resolve dependências automaticamente quando necessário.
-
----
-
-## Navegação no sistema
-
-### pwd
-
-Mostra o caminho da pasta atual.
+Atualiza completamente o sistema, resolvendo dependências e instalando novas versões dos pacotes.
 
 ---
 
-### ls
+# Navegação entre diretórios
 
-Lista os arquivos da pasta.
+## pwd
 
----
-
-### ls -l
-
-Lista os arquivos com detalhes.
-
-Exibe permissões, proprietário, grupo, tamanho e data de modificação.
+Mostra o caminho completo da pasta atual.
 
 ---
 
-### ls -a
+## ls
 
-Mostra todos os arquivos, incluindo os ocultos.
-
-Arquivos ocultos começam com um ponto (`.`).
+Lista os arquivos e pastas do diretório atual.
 
 ---
 
-### ls -la
+## ls -l
 
-Combina as opções `-l` e `-a`.
-
-Mostra arquivos ocultos com informações detalhadas.
+Lista os arquivos com informações detalhadas, como permissões, proprietário, tamanho e data.
 
 ---
 
-### ls -ltr
+## ls -a
+
+Mostra todos os arquivos, incluindo os arquivos ocultos.
+
+---
+
+## ls -la
+
+Combina as opções `-l` e `-a`, exibindo detalhes de todos os arquivos, inclusive os ocultos.
+
+---
+
+## ls -ltr
 
 Lista os arquivos ordenados pela data de modificação.
 
-Os arquivos mais recentes aparecem ao final da lista.
+---
+
+## cd
+
+Entra em uma pasta.
 
 ---
 
-### cd
-
-Entra em um diretório.
-
----
-
-### cd ..
+## cd ..
 
 Volta para a pasta anterior.
 
 ---
 
-### cd -
+## cd -
 
 Retorna para o último diretório acessado.
 
 ---
 
-## Ajuda
+# Ajuda
 
-### man comando
+## man
 
-Abre o manual oficial de um comando.
+Abre o manual de um comando.
 
 Exemplo:
 
@@ -202,41 +198,13 @@ man ls
 
 ---
 
-### info comando
+## info
 
-Exibe uma documentação mais completa que o comando `man` em alguns programas.
-
----
-
-## Desligamento do sistema
-
-### sudo init 0
-
-Desliga o sistema operacional.
-
-### Outros comandos modernos
-
-```bash
-sudo poweroff
-```
-
-Desliga imediatamente.
-
-```bash
-sudo shutdown now
-```
-
-Desliga o computador imediatamente.
-
-```bash
-sudo shutdown -h +10
-```
-
-Agenda o desligamento para 10 minutos.
+Abre uma documentação mais detalhada de alguns comandos.
 
 ---
 
-# Permissões no Linux
+# Informações sobre permissões
 
 Quando executamos:
 
@@ -244,78 +212,67 @@ Quando executamos:
 ls -l
 ```
 
-Podemos encontrar algo semelhante a:
+Podemos encontrar algo parecido com:
 
 ```text
 drwxr-xr-x
 ```
 
-## Primeira letra
+### Primeira letra
 
-| Símbolo | Significado |
-|---------|-------------|
-| d | Diretório (pasta) |
-| - | Arquivo comum |
+- `d` → Diretório (pasta)
+- `-` → Arquivo comum
 
----
+### Permissões
 
-## Permissões
+- `r` → Read (Leitura)
+- `w` → Write (Escrita)
+- `x` → Execute (Execução)
 
-| Letra | Significado |
-|--------|-------------|
-| r | Leitura (Read) |
-| w | Escrita (Write) |
-| x | Execução (Execute) |
-
----
-
-## Quem possui essas permissões?
+### Quem possui essas permissões?
 
 As permissões são divididas em três grupos:
 
-### Dono (Owner)
+- **Dono (Owner):** quem criou o arquivo.
+- **Grupo (Group):** usuários pertencentes ao mesmo grupo.
+- **Outros (Others):** qualquer outro usuário do sistema.
 
-É quem criou o arquivo.
-
----
-
-### Grupo (Group)
-
-Usuários pertencentes ao mesmo grupo.
-
----
-
-### Outros (Others)
-
-Todos os demais usuários do sistema.
-
----
-
-## Exemplo
+Exemplo:
 
 ```
 drwxr-xr-x
 ```
 
-Significa:
-
-- O dono pode ler, escrever e executar.
-- O grupo pode ler e executar.
-- Os outros usuários também podem ler e executar.
-
-Como não possuem a permissão **w**, não podem alterar ou apagar o arquivo.
+- Dono → leitura, escrita e execução.
+- Grupo → leitura e execução.
+- Outros → leitura e execução.
 
 ---
 
-# Resumo
+# Encerramento do sistema
 
-Nesta aula aprendi:
+## sudo init 0
 
-- Navegação entre diretórios.
-- Listagem de arquivos.
-- Monitoramento de processos.
-- Visualização de informações do sistema.
-- Gerenciamento de pacotes.
-- Uso do sudo.
-- Conceito de Kernel.
-- Estrutura das permissões do Linux.
+Desliga o computador.
+
+Também existem outros comandos que possuem a mesma finalidade:
+
+```bash
+sudo poweroff
+```
+
+```bash
+sudo shutdown now
+```
+
+```bash
+systemctl poweroff
+```
+
+Todos desligam o sistema, mas atualmente `poweroff` e `shutdown` são os comandos mais utilizados.
+
+---
+
+# Resumo da aula
+
+Nesta aula aprendi os primeiros comandos do terminal Linux, utilizados para monitorar processos, consultar informações do sistema, navegar entre diretórios, gerenciar pacotes e compreender como funcionam as permissões de arquivos e diretórios.
